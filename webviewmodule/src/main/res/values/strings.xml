@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="query_webgl">webgl</string>
+    <string name="query_canvas">canvas</string>
+    <string name="query_noaudio">noaudio</string>
+    <string name="query_showfps">showfps</string>
+
+    <string name="webview_detection_source">
+        dmFyIHdlYmdsPWZ1bmN0aW9uKCl7dHJ5e3ZhciBlPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImNhbnZhcyIpO3JldHVy
+        biEoIWUuZ2V0Q29udGV4dCgid2ViZ2wiKSYmIWUuZ2V0Q29udGV4dCgiZXhwZXJpbWVudGFsLXdlYmdsIikpfWNhdGNo
+        KGUpe3JldHVybiBjb25zb2xlLmxvZyhlKSwhMX19LHdlYmF1ZGlvPWZ1bmN0aW9uKCl7dHJ5e3ZhciBlPW51bGw7cmV0
+        dXJuInVuZGVmaW5lZCIhPXR5cGVvZiBBdWRpb0NvbnRleHQ/ZT1uZXcgQXVkaW9Db250ZXh0OiJ1bmRlZmluZWQiIT10
+        eXBlb2Ygd2Via2l0QXVkaW9Db250ZXh0JiYoZT1uZXcgd2Via2l0QXVkaW9Db250ZXh0KSwhIWV9Y2F0Y2goZSl7cmV0
+        dXJuIGNvbnNvbGUubG9nKGUpLCExfX07
+    </string>
+
+    <string name="webview_default_page">
+        PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KPG1ldGEgY2hhcnNldD1VVEYtOD4KPHN0eWxlPmJvZHl7YmFja2dy
+        b3VuZC1jb2xvcjpibGFja30jY29weXJpZ2h0e3Bvc2l0aW9uOmZpeGVkO2JvdHRvbTowO3JpZ2h0OjA7Y29sb3I6d2hp
+        dGU7Zm9udC1mYW1pbHk6Q29uc29sYXMsTW9uYWNvLEx1Y2lkYSBDb25zb2xlLExpYmVyYXRpb24gTW9ubyxEZWphVnUg
+        U2FucyBNb25vLEJpdHN0cmVhbSBWZXJhIFNhbnMgTW9ubyxDb3VyaWVyIE5ldyxtb25vc3BhY2V9PC9zdHlsZT4KPC9o
+        ZWFkPgo8Ym9keSBvbmxvYWQ9Ym9vdC5zdGFydCgpPgo8ZGl2IGlkPWNvcHlyaWdodD4mIzE2OTsgJiM5MjM7TFRJTUlU
+        IENPTU1VTklUWSBDT05UUklCVVRPUlM8L2Rpdj4KPC9ib2R5Pgo8L2h0bWw+
+    </string>
+</resources>

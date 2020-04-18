@@ -1,0 +1,3 @@
+rootProject.name='rpg-maker-mv-rpgmakerplayer'
+include ':app'
+include ':webviewmodule'

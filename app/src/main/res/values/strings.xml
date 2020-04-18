@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">rpgmakermv player</string>
+    <string name="mv_project_index">//android_asset/www/index.html</string>
+
+</resources>

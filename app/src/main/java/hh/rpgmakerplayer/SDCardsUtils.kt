@@ -116,7 +116,7 @@ object SDCardsUtils {
     }
     var dialog:FilePickerDialog?=null
 
-    fun initFolderSelection(context: Context){
+    fun initFolderSelection(context: Context,filecallback: filecallback){
         if(getSDCard1(context)!=null){
             var sddialog= AlertDialog.Builder(context)
             sddialog.setTitle(R.string.sdchoose)
@@ -127,13 +127,13 @@ object SDCardsUtils {
                     {
                         0-> {
                             var folder = getSDCard0(context)
-                            filedialog(context,folder)
+                            filedialog(context,folder,filecallback)
                             dialog!!.show()
                         }
 
                         1->            {
                             var folder=getSDCard1(context)
-                            filedialog(context,folder)
+                            filedialog(context,folder,filecallback)
                             dialog!!.show()
 
                         }
@@ -144,12 +144,12 @@ object SDCardsUtils {
         }
         else {
             var folder = getSDCard0(context)
-            filedialog(context,folder)
+            filedialog(context,folder,filecallback)
             dialog!!.show()
         }
     }
 
-    fun filedialog(context: Context,folder:String?){
+    fun filedialog(context: Context,folder:String?,filecallback: filecallback){
         var properties = DialogProperties()
         properties.selection_mode = DialogConfigs.SINGLE_MODE
         properties.selection_type = DialogConfigs.FILE_SELECT
@@ -157,16 +157,23 @@ object SDCardsUtils {
         properties.error_dir = File(DialogConfigs.DEFAULT_DIR)
         properties.offset = File(DialogConfigs.DEFAULT_DIR)
         var exten=ArrayList<String>()
-        exten.add("bin")
+        exten.add("html")
         properties.extensions=exten.toTypedArray()
         dialog = FilePickerDialog(context, properties)
         dialog!!.setTitle(context.getString(R.string.fileselmsg))
         dialog!!.setPositiveBtnName(context.getString(R.string.filesepo))
         dialog!!.setNegativeBtnName(context.getString(R.string.filesena))
-
         dialog!!.setDialogSelectionListener (object: DialogSelectionListener {
             override fun onSelectedFilePaths(files: Array<out String>?) {
+                files?.apply {
+                    filecallback.onPath(this.get(0))
+                }
+
             }
         })
+    }
+
+    interface filecallback{
+        fun onPath(path:String)
     }
 }

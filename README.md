@@ -2,6 +2,8 @@
 
 <img src="https://img.shields.io/github/v/release/huhao1987/RMMV-android-deployment.svg">
 
+## [点击阅读中文文档](https://github.com/huhao1987/RMMV-android-deployment/blob/master/README.zh_CN.md "简体中文")	
+
 
  *The project is built on https://github.com/AltimitSystems/mv-android-client, although it has changed a lot of code. Thanks for Altimit Systems` code!*
 

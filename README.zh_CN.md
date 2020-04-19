@@ -42,7 +42,7 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
 7. 在MainActivity的oncreate方法中加入下面几行
 ```kotlin
 webplayview.build()
-webplayview.Playgame(path)
+webplayview.Playgame("//android_asset/www/index.html")
 ```
 8. 在手机上编译并且运行你的游戏.
 

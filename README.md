@@ -13,7 +13,7 @@
 ## How to use the library
 #### Basic steps
 1. You need the latest Android studio, currently, the latest version is 3.6.2.
-2. Create a new Android project or open your exist Android project.
+2. Create a new Android project with "empty activity" or open your exist Android project.
 3. After "Gradle Build Running" finish, choose the "build.gradle(Project:xxxx)", add "maven { url 'https://jitpack.io' }" in allproects
 ```kotlin
 allprojects {
@@ -31,6 +31,34 @@ allprojects {
 implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 ```
 
+5.3 hoose "manifests", in "activity" tag, add
+```kotlin
+       android:configChanges="orientation|screenSize"
+       android:screenOrientation="sensorLandscape"
+```
+to make the game run as horizontal screen
+
+* If your game need network connection
+5.1 please add 
+```kotlin
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+5.2 in "application" tag, add 
+```kotlin
+        android:networkSecurityConfig="@xml/network_security_config"
+```
+5.3 right click "app"->"New"->"Android Resource Directory",  then choose "xml" in Resource type.
+    right click "xml"->"New"->"XML Resource file",name it as "network_security_config", and copy the code below inside
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
+```
+5.1 and 5.2 are used to give the network permission for your game, or it cannot connect to the Internet. 5.2 ensure that the app can connect to both "http" and "https"
+
+
 5. Now add the rpgPlayerView view in the layout of your mian activity(If you just create a new project, it should be named "MainActivity", and the name of layout should be "activity_mian")
 ```kotlin
  <hh.rpgmakerplayer.webviewmodule.rpgPlayerView
@@ -42,10 +70,18 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 6. If your project doesn`t have assets folder, right click "app"-"New"->"Folder"->"Assets Folder",Put the folder "www" of RMMV game in to "assets" folder.
 
 7. In MainActivity add the lines in onCreate
+* kotlin:
 ```kotlin
-webplayview.build()
-webplayview.Playgame("//android_asset/www/index.html")
+rpgwebview.build()
+rpgwebview.Playgame("//android_asset/www/index.html")
 ```
+* Java:
+```Java
+rpgPlayerView rpgwebview=findViewById(R.id.rpgwebview)
+rpgwebview.build()
+rpgwebview.Playgame("//android_asset/www/index.html")
+```
+
 8. Build and run the debug game on your phone.
 
 ## Advance 

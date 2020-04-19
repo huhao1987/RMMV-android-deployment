@@ -21,7 +21,7 @@ class rpgPlayerView @JvmOverloads constructor(
 ) : WebView(context, attrs, defStyleAttr) {
     private var rendervalue:String?=null
     private var fullscreen:Boolean=true
-    fun setRendervalue(value:String):rpgPlayerView{
+    fun setevaluateJavascript(value:String):rpgPlayerView{
         this.rendervalue=value
         return this
     }

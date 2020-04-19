@@ -38,12 +38,15 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
  ```
-6. In MainActivity add the lines in onCreate
+ 
+6. If your project doesn`t have assets folder, right click "app"-"New"->"Folder"->"Assets Folder",Put the folder "www" of RMMV game in to "assets" folder.
+
+7. In MainActivity add the lines in onCreate
 ```kotlin
 webplayview.build()
 webplayview.Playgame(path)
 ```
-7. Build and run the debug game on your phone.
+8. Build and run the debug game on your phone.
 
 ## Advance 
 You can use some features in the build function of rpgPlayerview.

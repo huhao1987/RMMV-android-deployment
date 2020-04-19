@@ -26,7 +26,7 @@ allprojects {
 
 4. 在 "build.gradle(Module:app)"中加入下面一行
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 ```
 
 5. 在项目的主activity的layout文件中加入下面的控件,默认主activity为MainActivity, 它的layout文件一般为activity_main.

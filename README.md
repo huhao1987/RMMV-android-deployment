@@ -31,7 +31,7 @@ allprojects {
 implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 ```
 
-5.3 hoose "manifests", in "activity" tag, add
+5. choose "manifests", in "activity" tag, add
 ```kotlin
        android:configChanges="orientation|screenSize"
        android:screenOrientation="sensorLandscape"
@@ -59,7 +59,7 @@ to make the game run as horizontal screen
 5.1 and 5.2 are used to give the network permission for your game, or it cannot connect to the Internet. 5.2 ensure that the app can connect to both "http" and "https"
 
 
-5. Now add the rpgPlayerView view in the layout of your mian activity(If you just create a new project, it should be named "MainActivity", and the name of layout should be "activity_mian")
+6. Now add the rpgPlayerView view in the layout of your mian activity(If you just create a new project, it should be named "MainActivity", and the name of layout should be "activity_mian")
 ```kotlin
  <hh.rpgmakerplayer.webviewmodule.rpgPlayerView
         android:id="@+id/rpgwebview"
@@ -67,9 +67,9 @@ to make the game run as horizontal screen
         android:layout_height="match_parent" />
  ```
  
-6. If your project doesn`t have assets folder, right click "app"-"New"->"Folder"->"Assets Folder",Put the folder "www" of RMMV game in to "assets" folder.
+7. If your project doesn`t have assets folder, right click "app"-"New"->"Folder"->"Assets Folder",Put the folder "www" of RMMV game in to "assets" folder.
 
-7. In MainActivity add the lines in onCreate
+8. In MainActivity add the lines in onCreate
 * kotlin:
 ```kotlin
 rpgwebview.build()
@@ -82,7 +82,7 @@ rpgwebview.build()
 rpgwebview.Playgame("//android_asset/www/index.html")
 ```
 
-8. Build and run the debug game on your phone.
+9. Build and run the debug game on your phone.
 
 ## Advance 
 You can use some features in the build function of rpgPlayerview.

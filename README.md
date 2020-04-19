@@ -28,7 +28,7 @@ allprojects {
 
 4. in "build.gradle(Module:app)", add below line in dependencies
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 ```
 
 5. Now add the rpgPlayerView view in the layout of your mian activity(If you just create a new project, it should be named "MainActivity", and the name of layout should be "activity_mian")

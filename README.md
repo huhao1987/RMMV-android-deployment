@@ -88,13 +88,13 @@ rpgwebview.Playgame("//android_asset/www/index.html")
 You can use some features in the build function of rpgPlayerview.
 1) open as fullscreen or not
 ```kotlin
-webplayview
+rpgwebview
  .isfullscreen(false/true)
  .build()
  ```
 2) use your own evaluateJavascript as String
  ```kotlin
-webplayview
+rpgwebview
  .setevaluateJavascript(xxxxxx)
  .build()
  ```

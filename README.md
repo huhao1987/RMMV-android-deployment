@@ -2,7 +2,6 @@
 
 <img src="https://img.shields.io/github/v/release/huhao1987/RMMV-android-deployment.svg">
 
-<span id="jump">跳转内容目标</span>
 
  *The project is built on https://github.com/AltimitSystems/mv-android-client, although it has changed a lot of code. Thanks for Altimit Systems` code!*
 

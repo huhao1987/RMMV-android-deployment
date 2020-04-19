@@ -36,12 +36,15 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
  ```
-6. 在MainActivity的oncreate方法中加入下面几行
+  
+6. 如果你的项目里没有assets目录,右键点击 "app"-"New"->"Folder"->"Assets Folder",然后把你游戏的www文件夹复制进去.
+
+7. 在MainActivity的oncreate方法中加入下面几行
 ```kotlin
 webplayview.build()
 webplayview.Playgame(path)
 ```
-7. 在手机上编译并且运行你的游戏.
+8. 在手机上编译并且运行你的游戏.
 
 ## 高级操作 
 除去基本步骤,你也可以使用一些其他属性

@@ -19,9 +19,21 @@ import java.security.cert.CertPath
 class rpgPlayerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : WebView(context, attrs, defStyleAttr) {
-init {
-    initUi()
-}
+    private var rendervalue:String?=null
+    private var fullscreen:Boolean=true
+    fun setRendervalue(value:String):rpgPlayerView{
+        this.rendervalue=value
+        return this
+    }
+
+    fun isfullscreen(fullscreen:Boolean=true):rpgPlayerView{
+       this.fullscreen=fullscreen
+        return this
+    }
+    fun build():rpgPlayerView{
+        initUi()
+        return this;
+    }
 
     fun initUi() {
         settings?.also {
@@ -46,12 +58,18 @@ init {
         }
         webChromeClient = rpgChromeClient(context)
         webViewClient = rpgViewClient()
-        initRendering(context)
+        initRendering()
         initwebdetect(context)
+        if(fullscreen)
+            UiUtils.setFullScreen(context)
     }
 
-    private fun initRendering(context: Context){
-        var renderdata=String(Base64.decode(context.getString(R.string.webview_detection_source), Base64.DEFAULT), Charset.forName("UTF-8")) + "boot" + "." + "prepare( webgl(), webaudio(), false )" + ";"
+    private fun initRendering(){
+        var renderdata=""
+        if(rendervalue!=null)
+            renderdata=rendervalue!!
+        else
+            renderdata=String(Base64.decode(context.getString(R.string.webview_detection_source), Base64.DEFAULT), Charset.forName("UTF-8")) + "boot" + "." + "prepare( webgl(), webaudio(), false )" + ";"
         this.post {
             Runnable {
                 if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT)

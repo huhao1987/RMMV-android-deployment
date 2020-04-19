@@ -26,7 +26,16 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
+    project.ext {
+        mavDevelopers = ["Hao":"Hu"]
+        mavSiteUrl = "https://github.com/huhao1987/rpg-maker-mv-player"
+        mavGitUrl = mavSiteUrl + '.git'
+        mavProjectName = 'RMMV Android deployment'
+        mavPublishToInternalRepo = true
+        mavRepoInternalUrl = "path/to/internal/repo"
+        mavLibraryLicenses = ["Apache-2.0":'http://www.apache.org/licenses/LICENSE-2.0.txt']
+        mavLibraryDescription = "A easy libary to deploy your rpg Maker MV games for android"
+    }
 }
 
 dependencies {
@@ -38,3 +47,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'
+

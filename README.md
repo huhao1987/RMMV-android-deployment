@@ -44,7 +44,7 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0'
 7. In MainActivity add the lines in onCreate
 ```kotlin
 webplayview.build()
-webplayview.Playgame(path)
+webplayview.Playgame("//android_asset/www/index.html")
 ```
 8. Build and run the debug game on your phone.
 

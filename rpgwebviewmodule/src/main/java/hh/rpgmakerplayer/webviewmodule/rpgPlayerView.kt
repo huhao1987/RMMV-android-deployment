@@ -16,9 +16,22 @@ import java.security.cert.CertPath
  * Created by Hao which is based on felixjones` code
  * @author Hao
  */
-class rpgPlayerView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : WebView(context, attrs, defStyleAttr) {
+class rpgPlayerView   : WebView {
+    constructor(mcontext: Context) : super(mcontext) {
+    }
+
+    constructor(
+        mcontext: Context,
+        attrs: AttributeSet?
+    ) : super(mcontext, attrs) {
+    }
+
+    constructor(
+        mcontext: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int
+    ) : super(mcontext, attrs, defStyleAttr) {
+    }
     private var rendervalue:String?=null
     private var fullscreen:Boolean=true
     fun setevaluateJavascript(value:String):rpgPlayerView{

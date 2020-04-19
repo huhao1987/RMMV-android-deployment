@@ -1,4 +1,4 @@
-# rpg-maker-mv-player
+# RMMV-android-deployment
 
 <img src="https://img.shields.io/github/v/release/huhao1987/RMMV-android-deployment.svg">
 

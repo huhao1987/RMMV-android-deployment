@@ -28,8 +28,34 @@ allprojects {
 ```kotlin
 implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 ```
+5. 选择 "manifests", 在"activity"标签内添加
+```kotlin
+       android:configChanges="orientation|screenSize"
+       android:screenOrientation="sensorLandscape"
+```
+此步骤可以保证游戏运行于横屏
 
-5. 在项目的主activity的layout文件中加入下面的控件,默认主activity为MainActivity, 它的layout文件一般为activity_main.
+* 如果你的游戏需要网络支持
+5.1 请添加 
+```kotlin
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+5.2 在"application"标签内添加 
+```kotlin
+        android:networkSecurityConfig="@xml/network_security_config"
+```
+5.3 右键点击 "app"->"New"->"Android Resource Directory", 在Resource type里选择"xml".
+    右键点击 "xml"->"New"->"XML Resource file",命名为"network_security_config",然后复制以下代码
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
+```
+5.1 和 5.2设置可以让游戏有网络连接权限.5.2能保证连接到"http"和"https"都不被阻断
+
+6. 在项目的主activity的layout文件中加入下面的控件,默认主activity为MainActivity, 它的layout文件一般为activity_main.
 ```kotlin
  <hh.rpgmakerplayer.webviewmodule.rpgPlayerView
         android:id="@+id/rpgwebview"
@@ -37,26 +63,33 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
         android:layout_height="match_parent" />
  ```
   
-6. 如果你的项目里没有assets目录,右键点击 "app"-"New"->"Folder"->"Assets Folder",然后把你游戏的www文件夹复制进去.
+7. 如果你的项目里没有assets目录,右键点击 "app"-"New"->"Folder"->"Assets Folder",然后把你游戏的www文件夹复制进去.
 
-7. 在MainActivity的oncreate方法中加入下面几行
+8. 在MainActivity的oncreate方法中加入下面几行
+* kotlin:
 ```kotlin
-webplayview.build()
-webplayview.Playgame("//android_asset/www/index.html")
+rpgwebview.build()
+rpgwebview.Playgame("//android_asset/www/index.html")
 ```
-8. 在手机上编译并且运行你的游戏.
+* Java:
+```Java
+rpgPlayerView rpgwebview=findViewById(R.id.rpgwebview)
+rpgwebview.build()
+rpgwebview.Playgame("//android_asset/www/index.html")
+```
+9. 在手机上编译并且运行你的游戏.
 
 ## 高级操作 
 除去基本步骤,你也可以使用一些其他属性
 1) 全屏游戏或者不全屏
 ```kotlin
-webplayview
+rpgwebview
  .isfullscreen(false/true)
  .build()
  ```
 2) 使用你自己的evaluateJavascript运行游戏
  ```kotlin
-webplayview
+rpgwebview
  .setevaluateJavascript(xxxxxx)
  .build()
  ```

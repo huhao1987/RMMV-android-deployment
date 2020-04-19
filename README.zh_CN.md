@@ -36,6 +36,7 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 此步骤可以保证游戏运行于横屏
 
 * 如果你的游戏需要网络支持
+
 5.1 请添加 
 ```kotlin
     <uses-permission android:name="android.permission.INTERNET" />

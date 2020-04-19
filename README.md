@@ -39,6 +39,7 @@ implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.1'
 to make the game run as horizontal screen
 
 * If your game need network connection
+
 5.1 please add 
 ```kotlin
     <uses-permission android:name="android.permission.INTERNET" />

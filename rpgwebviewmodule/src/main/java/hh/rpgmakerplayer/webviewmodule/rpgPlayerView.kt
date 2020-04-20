@@ -81,7 +81,7 @@ class rpgPlayerView   : WebView {
     }
 
     private fun addjsinterface(){
-        this.addJavascriptInterface(JSInterface(context),"androidinterface")
+        this.addJavascriptInterface(JSInterface(context,encrypt.Base64),"androidinterface")
     }
     private fun initRendering(){
         var renderdata=""

@@ -1,6 +1,7 @@
 package hh.rpgmakerplayer.webviewmodule
 
 import android.content.Context
+import android.util.Base64
 import android.util.Log
 import android.webkit.JavascriptInterface
 import java.io.*
@@ -8,14 +9,41 @@ import java.io.*
 /**
  * interface to comunicate with javascript
  */
-class JSInterface(private val mContext: Context) : Any() {
 
-    //在js中调用window.AndroidWebView.showInfoFromJs(name)，便会触发此方法。
-    @JavascriptInterface
-    fun showInfoFromJs(name: String?) {
-        Log.d("savedata::", name)
+/*
+    enum class for encrypt
+ */
+enum class encrypt{
+        None,
+        Base64
+}
+
+class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encrypt.None, var middlepath:String="") : Any() {
+    private val TAG = "RPGsavestatus::"
+
+    private fun getfilename(id: String): String {
+        if (id.toInt() < 0)
+            return "config"
+        else if (id.toInt() == 0)
+            return "global"
+        else return "file$id"
     }
 
+
+    private fun encryptsave(value:String):String{
+        when(encryptmethod) {
+            encrypt.None->return value
+            encrypt.Base64->return Base64.encodeToString(value.toByteArray(),Base64.DEFAULT)
+            else->return value
+        }
+    }
+    private fun decryptsave(envalue:String):String{
+        when(encryptmethod) {
+            encrypt.None->return envalue
+            encrypt.Base64->return String(Base64.decode(envalue,Base64.DEFAULT))
+            else->return envalue
+        }
+    }
     @JavascriptInterface
     fun savedata(id: String, value: String) {
         createsavefile(id, value)
@@ -28,14 +56,17 @@ class JSInterface(private val mContext: Context) : Any() {
 
     @JavascriptInterface
     fun backupdata(id: String) {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/save")
-        val savefile = File(savepath.absolutePath, "$id.rpgsave")
-        val savebackpath = File("$path/savebackup")
+        Log.d(TAG, "backup save on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File("$path/save")
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
+        var savebackpath = File("$path/save")
         if (!savebackpath.isDirectory || !savebackpath.exists()) savebackpath.mkdirs()
-        val backupfile =
-            File(savebackpath.absolutePath, "$id.rpgsave.bak")
-        savefile.renameTo(backupfile)
+        if (savefile.exists()) {
+            var backupfile =
+                File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
+            savefile.renameTo(backupfile)
+        }
     }
 
     @JavascriptInterface
@@ -45,11 +76,12 @@ class JSInterface(private val mContext: Context) : Any() {
 
     @JavascriptInterface
     fun backupexists(id: String): Boolean {
-        val path = mContext.filesDir.absolutePath
-        val savebackpath = File("$path/savebackup")
+//        Log.d(TAG, "backup save exist judgement on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savebackpath = File("$path/save")
         if (!savebackpath.isDirectory || !savebackpath.exists()) return false
-        val backupfile =
-            File(savebackpath.absolutePath, "$id.rpgsave.bak")
+        var backupfile =
+            File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
         return if (backupfile.exists() || backupfile.length() > 0) {
             true
         } else false
@@ -57,10 +89,11 @@ class JSInterface(private val mContext: Context) : Any() {
 
     @JavascriptInterface
     fun cleanbackup(id: String) {
-        val path = mContext.filesDir.absolutePath
-        val savebackpath = File("$path/savebackup")
-        val backupfile =
-            File(savebackpath.absolutePath, "$id.rpgsave.bak")
+        Log.d(TAG, "delete backup save on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savebackpath = File("$path/save")
+        var backupfile =
+            File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
         if (backupfile.exists()) {
             backupfile.delete()
         }
@@ -68,43 +101,48 @@ class JSInterface(private val mContext: Context) : Any() {
 
     @JavascriptInterface
     fun restorebackup(id: String) {
-        val path = mContext.filesDir.absolutePath
-        val savebackpath = File("$path/savebackup")
-        val backupfile =
-            File(savebackpath.absolutePath, "$id.rpgsave.bak")
+        Log.d(TAG, "restore backup save on ${getfilename(id)}.rpgsave.bak")
+        var path = mContext.filesDir.absolutePath
+        var savebackpath = File("$path/save")
+        var backupfile =
+            File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
         if (backupfile.exists()) {
-            val savepath = File("$path/save")
-            val savefile = File(savepath.absolutePath, "$id.rpgsave")
+            var savepath = File("$path/save")
+            var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
             backupfile.renameTo(savefile)
         }
     }
 
     @JavascriptInterface
     fun savefileexists(id: String): Boolean {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/save")
+//        Log.d(TAG, "save file exist judgement on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return false
-        val savefile = File(savepath.absolutePath, "$id.rpgsave")
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         return if (!savefile.exists() || savefile.length() == 0L) false else true
     }
 
     @JavascriptInterface
     fun removefile(id: String) {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/save")
-        val savefile = File(savepath.absolutePath, "$id.rpgsave")
+        Log.d(TAG, "remove save on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File("$path/save")
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         if (savefile.exists() && savefile.length() > 0) savefile.delete()
     }
 
     private fun createsavefile(id: String, value: String) {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/save")
+        Log.d(TAG, "create new save on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File(path+"/save")
         if (!savepath.isDirectory || !savepath.exists()) savepath.mkdirs()
-        val savefile = File(savepath.absolutePath, "$id.rpgsave")
+
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         var outputStream: FileOutputStream? = null
         try {
             outputStream = FileOutputStream(savefile)
-            outputStream.write(value.toByteArray())
+            outputStream.write(encryptsave(value).toByteArray())
             outputStream.close()
         } catch (e: FileNotFoundException) {
         } catch (e: IOException) {
@@ -113,15 +151,16 @@ class JSInterface(private val mContext: Context) : Any() {
     }
 
     private fun loadsavefile(id: String): String? {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/save")
+        Log.d(TAG, "load save on ${getfilename(id)}.rpgsave")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return null
-        val savefile = File(savepath.absolutePath, "$id.rpgsave")
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         return if (!savefile.exists() || savefile.length() == 0L) null else try {
-            val inputStream = FileInputStream(savefile)
+            var inputStream = FileInputStream(savefile)
             var stringBuilder: StringBuilder? = null
-            val streamReader = InputStreamReader(inputStream)
-            val reader = BufferedReader(streamReader)
+            var streamReader = InputStreamReader(inputStream)
+            var reader = BufferedReader(streamReader)
             var line: String?
             stringBuilder = StringBuilder()
             while (reader.readLine().also { line = it } != null) {
@@ -130,7 +169,7 @@ class JSInterface(private val mContext: Context) : Any() {
             }
             reader.close()
             inputStream.close()
-            stringBuilder.toString()
+            decryptsave(stringBuilder.toString())
         } catch (e: FileNotFoundException) {
             null
         } catch (e: IOException) {
@@ -140,15 +179,16 @@ class JSInterface(private val mContext: Context) : Any() {
     }
 
     private fun loadbackupsavefile(id: String): String? {
-        val path = mContext.filesDir.absolutePath
-        val savepath = File("$path/savebackup")
+        Log.d(TAG, "load backup save on ${getfilename(id)}.rpgsave.bak")
+        var path = mContext.filesDir.absolutePath
+        var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return null
-        val savefile = File(savepath.absolutePath, "$id.rpgsave.bak")
+        var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave.bak")
         return if (!savefile.exists() || savefile.length() == 0L) null else try {
-            val inputStream = FileInputStream(savefile)
+            var inputStream = FileInputStream(savefile)
             var stringBuilder: StringBuilder? = null
-            val streamReader = InputStreamReader(inputStream)
-            val reader = BufferedReader(streamReader)
+            var streamReader = InputStreamReader(inputStream)
+            var reader = BufferedReader(streamReader)
             var line: String?
             stringBuilder = StringBuilder()
             while (reader.readLine().also { line = it } != null) {
@@ -157,7 +197,7 @@ class JSInterface(private val mContext: Context) : Any() {
             }
             reader.close()
             inputStream.close()
-            stringBuilder.toString()
+            decryptsave(stringBuilder.toString())
         } catch (e: FileNotFoundException) {
             null
         } catch (e: IOException) {
@@ -165,5 +205,4 @@ class JSInterface(private val mContext: Context) : Any() {
             null
         }
     }
-
 }

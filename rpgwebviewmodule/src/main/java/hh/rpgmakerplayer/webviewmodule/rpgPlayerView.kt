@@ -69,15 +69,20 @@ class rpgPlayerView   : WebView {
                 it.setRenderPriority(WebSettings.RenderPriority.HIGH)
 
                 it.javaScriptEnabled = true
+
         }
         webChromeClient = rpgChromeClient(context)
         webViewClient = rpgViewClient()
         initRendering()
+        addjsinterface()
         initwebdetect(context)
         if(fullscreen)
             UiUtils.setFullScreen(context)
     }
 
+    private fun addjsinterface(){
+        this.addJavascriptInterface(JSInterface(context),"androidinterface")
+    }
     private fun initRendering(){
         var renderdata=""
         if(rendervalue!=null)

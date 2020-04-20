@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         initFolderSelection(this,object: SDCardsUtils.filecallback{
             override fun onPath(path: String) {
                 webplayview
-                    .isfullscreen(false)
                     .build()
                 webplayview.Playgame(path)
 

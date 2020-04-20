@@ -18,12 +18,13 @@ import java.security.cert.CertPath
  */
 class rpgPlayerView   : WebView {
     constructor(mcontext: Context) : super(mcontext) {
+
     }
 
     constructor(
         mcontext: Context,
         attrs: AttributeSet?
-    ) : super(mcontext, attrs) {
+    ) : super(mcontext, attrs,mcontext.resources.getIdentifier("webViewStyle","attr","android")) {
     }
 
     constructor(

@@ -8,9 +8,13 @@
 #### 本项目提供了一个可以帮助RMMV游戏作者制作_安卓_版本游戏的依赖库,并且使用方便快捷.
 **本项目使用kotlin编写,所以代码比Java更易读和简便.**
 
+## 更新日志 ##
+**1.0.3 添加Android本地存档支持（基于我编写的插件）**
+
+
 ## 如何使用
 #### 基本步骤
-1. 首先你要下载最新Android Studio, 目前最新版是3.6.2.
+1. 首先你要下载最新Android Studio, 目前最新版是3.6.3.
 2. 创建一个新项目或者打开一个已有的项目.
 3. 在项目环境刷新完毕后,选择"build.gradle(Project:xxxx)" 在allproects里加入 "maven { url 'https://jitpack.io' }"
 ```kotlin
@@ -26,7 +30,7 @@ allprojects {
 
 4. 在 "build.gradle(Module:app)"中加入下面一行
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.2'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.3'
 ```
 5. 选择 "manifests", 在"activity"标签内添加
 ```kotlin
@@ -94,8 +98,17 @@ rpgwebview
  .setevaluateJavascript(xxxxxx)
  .build()
  ```
-3) 更多新功能....
-比如,Android上本地存储模式基本上没用,新功能中会加入,尽情期待...
+ 
+ 3) **Android save support**
+
+   由于Android系统的限制，RMMV无法将存档保存在Android本地，我写了个插件来支持。
+   用法很简单，首先使用本项目来创建你的Android游戏项目，从 [这里](https://github.com/huhao1987/RMMV-Plugins)下载hh_Android_save.js，然后在你的RMMV项目中开启这个插件。
+   
+   **记住修改之后更新你Android项目中的assets文件夹**
+   
+   之后当你测试和玩游戏的时候，游戏存档会被存储在app的内部存储中，如果你root过，可以在这个文件夹下找到游戏存档。
+    
+4) 更多新功能...敬请期待
 
 
 ## Demo

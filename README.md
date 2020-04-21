@@ -10,9 +10,12 @@
 #### The project is a library which helps RMMV game creators to build  _Android_  version of their games very easy.
 **The project is built by kotlin, so the codes of it are less and easier to read than Java**
 
+## Update Log ##
+**1.0.3 Add Android internal storage save support(with my RMMV plugin)**
+
 ## How to use the library
 #### Basic steps
-1. You need the latest Android studio, currently, the latest version is 3.6.2.
+1. You need the latest Android studio, currently, the latest version is 3.6.3.
 2. Create a new Android project with "empty activity" or open your exist Android project.
 3. After "Gradle Build Running" finish, choose the "build.gradle(Project:xxxx)", add "maven { url 'https://jitpack.io' }" in allproects
 ```kotlin
@@ -28,7 +31,7 @@ allprojects {
 
 4. in "build.gradle(Module:app)", add below line in dependencies
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.2'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.3'
 ```
 
 5. choose "manifests", in "activity" tag, add
@@ -99,8 +102,17 @@ rpgwebview
  .setevaluateJavascript(xxxxxx)
  .build()
  ```
-3) More features comming....
-For example, fix the local mode save on Android...
+ 
+3) **Android save support**
+
+   As the limitation of Android system, the RMMV cannot store the save in the internal storage. I wrote a RMMV plugin to support it.
+   It`s easy to use, just use my deployment method above to create your Android game project, and Add the "hh_Android_save.js" from [here](https://github.com/huhao1987/RMMV-Plugins), and add it in your RMMV game project and turn on it.
+   
+   **Remember to update the assets folder in your android project after modification**
+   
+   After these stages, when you test and play the game, the game saves will be saved in the internal storage, right now the path will be in the root folder, you could only find out them if you rooted your phone.
+    
+4) More features comming....
 
 
 ## Demo

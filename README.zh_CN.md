@@ -99,7 +99,7 @@ rpgwebview
  .build()
  ```
  
- 3) **Android save support**
+ 3) **Android 存档支持**
 
    由于Android系统的限制，RMMV无法将存档保存在Android本地，我写了个插件来支持。
    用法很简单，首先使用本项目来创建你的Android游戏项目，从 [这里](https://github.com/huhao1987/RMMV-Plugins)下载hh_Android_save.js，然后在你的RMMV项目中开启这个插件。

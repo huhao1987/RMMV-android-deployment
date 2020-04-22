@@ -76,6 +76,8 @@ class rpgPlayerView   : WebView {
         initRendering()
         addjsinterface()
         initwebdetect(context)
+        this.requestFocus(View.FOCUS_DOWN)
+
         if(fullscreen)
             UiUtils.setFullScreen(context)
     }

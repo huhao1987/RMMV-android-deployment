@@ -31,7 +31,7 @@ allprojects {
 
 4. in "build.gradle(Module:app)", add below line in dependencies
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.3'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.4'
 ```
 
 5. choose "manifests", in "activity" tag, add

@@ -111,6 +111,3 @@ rpgwebview
 4) 更多新功能...敬请期待
 
 
-## Demo
-内部代码中包含一个名为RPG maker mv player的app,这个app是一个Android上的通用rpg maker mv游戏运行器.可以玩手机存储内的游戏,不久会上线到google play.
-

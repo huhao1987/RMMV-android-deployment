@@ -115,7 +115,3 @@ rpgwebview
 4) More features comming....
 
 
-## Demo
-The app inside the codes is a complete app which is my app **"RPG maker mv player"**. It is a common player which can play any RMMV game on your storage, You can play the game by choosing the index.html in the RMMV game`s folder. 
-
-

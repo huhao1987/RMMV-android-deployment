@@ -18,8 +18,16 @@ enum class encrypt{
         Base64
 }
 
-class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encrypt.None, var middlepath:String="") : Any() {
+class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encrypt.None, var middlepath:String?=null) : Any() {
     private val TAG = "RPGsavestatus::"
+    private val path =
+        if(middlepath==null)mContext.filesDir.absolutePath
+        else{
+            var p= mContext.filesDir.absolutePath+"/$middlepath"
+            var filedir=File(p)
+            if(!filedir.exists()) filedir.mkdir()
+            p
+        }
 
     private fun getfilename(id: String): String {
         if (id.toInt() < 0)
@@ -57,7 +65,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun backupdata(id: String) {
         Log.d(TAG, "backup save on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savepath = File("$path/save")
         var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         var savebackpath = File("$path/save")
@@ -77,7 +84,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun backupexists(id: String): Boolean {
 //        Log.d(TAG, "backup save exist judgement on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savebackpath = File("$path/save")
         if (!savebackpath.isDirectory || !savebackpath.exists()) return false
         var backupfile =
@@ -90,7 +96,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun cleanbackup(id: String) {
         Log.d(TAG, "delete backup save on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savebackpath = File("$path/save")
         var backupfile =
             File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
@@ -102,7 +107,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun restorebackup(id: String) {
         Log.d(TAG, "restore backup save on ${getfilename(id)}.rpgsave.bak")
-        var path = mContext.filesDir.absolutePath
         var savebackpath = File("$path/save")
         var backupfile =
             File(savebackpath.absolutePath, "${getfilename(id)}.rpgsave.bak")
@@ -116,7 +120,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun savefileexists(id: String): Boolean {
 //        Log.d(TAG, "save file exist judgement on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return false
         var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
@@ -126,7 +129,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
     @JavascriptInterface
     fun removefile(id: String) {
         Log.d(TAG, "remove save on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savepath = File("$path/save")
         var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
         if (savefile.exists() && savefile.length() > 0) savefile.delete()
@@ -134,7 +136,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
 
     private fun createsavefile(id: String, value: String) {
         Log.d(TAG, "create new save on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savepath = File(path+"/save")
         if (!savepath.isDirectory || !savepath.exists()) savepath.mkdirs()
 
@@ -152,7 +153,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
 
     private fun loadsavefile(id: String): String? {
         Log.d(TAG, "load save on ${getfilename(id)}.rpgsave")
-        var path = mContext.filesDir.absolutePath
         var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return null
         var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave")
@@ -180,7 +180,6 @@ class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encry
 
     private fun loadbackupsavefile(id: String): String? {
         Log.d(TAG, "load backup save on ${getfilename(id)}.rpgsave.bak")
-        var path = mContext.filesDir.absolutePath
         var savepath = File("$path/save")
         if (!savepath.isDirectory || !savepath.exists()) return null
         var savefile = File(savepath.absolutePath, "${getfilename(id)}.rpgsave.bak")

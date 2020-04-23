@@ -36,6 +36,7 @@ class rpgPlayerView   : WebView {
     }
     private var rendervalue:String?=null
     private var fullscreen:Boolean=true
+    private var gamename:String?=null
     fun setevaluateJavascript(value:String):rpgPlayerView{
         this.rendervalue=value
         return this
@@ -43,6 +44,10 @@ class rpgPlayerView   : WebView {
 
     fun isfullscreen(fullscreen:Boolean=true):rpgPlayerView{
        this.fullscreen=fullscreen
+        return this
+    }
+    fun setgamesavefolder(middlename:String?):rpgPlayerView{
+        gamename=middlename;
         return this
     }
     fun build():rpgPlayerView{
@@ -68,7 +73,6 @@ class rpgPlayerView   : WebView {
             it.javaScriptCanOpenWindowsAutomatically = true
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2)
                 it.setRenderPriority(WebSettings.RenderPriority.HIGH)
-
                 it.javaScriptEnabled = true
 
         }
@@ -84,7 +88,7 @@ class rpgPlayerView   : WebView {
     }
 
     private fun addjsinterface(){
-        this.addJavascriptInterface(JSInterface(context,encrypt.Base64),"androidinterface")
+        this.addJavascriptInterface(JSInterface(context,encrypt.Base64,gamename),"androidinterface")
     }
     private fun initRendering(){
         var renderdata=""
@@ -130,9 +134,13 @@ class rpgPlayerView   : WebView {
         super.evaluateJavascript(script, resultCallback)
     }
 
-    fun Playgame(path: String){
-        var mURIBuilder= Uri.fromFile(File(path))
-            .buildUpon()
-        this.loadUrl(mURIBuilder.build().toString())
+    fun Playgame(path: String,isurl:Boolean){
+        if(!isurl) {
+            var mURIBuilder = Uri.fromFile(File(path))
+                .buildUpon()
+            this.loadUrl(mURIBuilder.build().toString())
+        }
+        else
+            this.loadUrl(path)
     }
 }

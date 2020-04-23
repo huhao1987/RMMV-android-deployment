@@ -134,7 +134,7 @@ class rpgPlayerView   : WebView {
         super.evaluateJavascript(script, resultCallback)
     }
 
-    fun Playgame(path: String,isurl:Boolean){
+    fun Playgame(path: String,isurl:Boolean=false){
         if(!isurl) {
             var mURIBuilder = Uri.fromFile(File(path))
                 .buildUpon()

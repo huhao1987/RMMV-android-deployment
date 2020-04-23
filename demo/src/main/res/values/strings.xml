@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">hero2de</string>
+    <string name="jsonViewer_icon_plus">expand</string>
+    <string name="jsonViewer_icon_minus">collapse</string>
+</resources>

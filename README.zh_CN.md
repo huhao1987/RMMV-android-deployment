@@ -30,7 +30,7 @@ allprojects {
 
 4. 在 "build.gradle(Module:app)"中加入下面一行
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.6'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.7'
 ```
 5. 选择 "manifests", 在"activity"标签内添加
 ```kotlin

@@ -12,6 +12,7 @@
 
 ## Update Log ##
 **Add Android internal storage save support(with my RMMV plugin)**
+**Add custom save path setup**
 
 ## How to use the library
 #### Basic steps
@@ -31,7 +32,7 @@ allprojects {
 
 4. in "build.gradle(Module:app)", add below line in dependencies
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.7'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.8'
 ```
 
 5. choose "manifests", in "activity" tag, add
@@ -108,6 +109,14 @@ rpgwebview
    As the limitation of Android system, the RMMV cannot store the save in the internal storage. I wrote a RMMV plugin to support it.
    It`s easy to use, just use my deployment method above to create your Android game project, and Add the "hh_Android_save.js" from [here](https://github.com/huhao1987/RMMV-Plugins), and add it in your RMMV game project and turn on it.
    
+ 4) **custom save path setup**
+ 
+    Add custom save path setup function which allows you to storage the save locally, but you need to add the write storage permission firstly.
+     
+ ```kotlin
+rpgwebview.setupcustompath("your path")
+rpgwebview.build()
+   ```
    **Remember to update the assets folder in your android project after modification**
    
    After these stages, when you test and play the game, the game saves will be saved in the internal storage, right now the path will be in the root folder, you could only find out them if you rooted your phone.

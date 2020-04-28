@@ -121,6 +121,6 @@ rpgwebview.build()
    
    After these stages, when you test and play the game, the game saves will be saved in the internal storage, right now the path will be in the root folder, you could only find out them if you rooted your phone.
     
-4) More features comming....
+5) More features comming....
 
 

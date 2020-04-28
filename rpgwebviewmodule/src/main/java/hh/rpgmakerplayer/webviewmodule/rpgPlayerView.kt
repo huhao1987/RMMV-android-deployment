@@ -37,6 +37,7 @@ class rpgPlayerView   : WebView {
     private var rendervalue:String?=null
     private var fullscreen:Boolean=true
     private var gamename:String?=null
+    private var custompath:String?=null
     fun setevaluateJavascript(value:String):rpgPlayerView{
         this.rendervalue=value
         return this
@@ -87,8 +88,11 @@ class rpgPlayerView   : WebView {
             UiUtils.setFullScreen(context)
     }
 
+    fun setupcustompath(custompath:String){
+        this.custompath=custompath
+    }
     private fun addjsinterface(){
-        this.addJavascriptInterface(JSInterface(context,encrypt.Base64,gamename),"androidinterface")
+        this.addJavascriptInterface(JSInterface(context,custompath,encrypt.Base64,gamename),"androidinterface")
     }
     private fun initRendering(){
         var renderdata=""

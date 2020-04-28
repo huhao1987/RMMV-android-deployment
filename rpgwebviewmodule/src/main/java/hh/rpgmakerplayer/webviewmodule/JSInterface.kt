@@ -18,15 +18,19 @@ enum class encrypt{
         Base64
 }
 
-class JSInterface(private var mContext: Context, var encryptmethod:encrypt=encrypt.None, var middlepath:String?=null) : Any() {
+class JSInterface(private var mContext: Context, var custompath:String?=null,var encryptmethod:encrypt=encrypt.None, var middlepath:String?=null) : Any() {
     private val TAG = "RPGsavestatus::"
     private val path =
-        if(middlepath==null)mContext.filesDir.absolutePath
-        else{
-            var p= mContext.filesDir.absolutePath+"/$middlepath"
-            var filedir=File(p)
-            if(!filedir.exists()) filedir.mkdir()
-            p
+        if(custompath!=null)
+            custompath
+        else {
+            if (middlepath == null) mContext.filesDir.absolutePath
+            else {
+                var p = mContext.filesDir.absolutePath + "/$middlepath"
+                var filedir = File(p)
+                if (!filedir.exists()) filedir.mkdir()
+                p
+            }
         }
 
     private fun getfilename(id: String): String {

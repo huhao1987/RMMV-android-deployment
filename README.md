@@ -11,6 +11,7 @@
 **The project is built by kotlin, so the codes of it are less and easier to read than Java**
 
 ## Update Log ##
+**Add Save type support**
 **Add Android internal storage save support(with my RMMV plugin)**
 
 **Add custom save path setup**
@@ -33,7 +34,7 @@ allprojects {
 
 4. in "build.gradle(Module:app)", add below line in dependencies
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.8'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.9'
 ```
 
 5. choose "manifests", in "activity" tag, add

@@ -9,6 +9,8 @@
 **本项目使用kotlin编写,所以代码比Java更易读和简便.**
 
 ## 更新日志 ##
+**添加存档类型支持**
+
 **添加Android本地存档支持（基于我编写的插件）**
 
 **添加自定义存档目录**
@@ -31,7 +33,7 @@ allprojects {
 
 4. 在 "build.gradle(Module:app)"中加入下面一行
 ```kotlin
-implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.7'
+implementation 'com.github.huhao1987:RMMV-android-deployment:1.0.9'
 ```
 5. 选择 "manifests", 在"activity"标签内添加
 ```kotlin

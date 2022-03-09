@@ -12,6 +12,7 @@
 
 ## Update Log ##
 **Add Save type support**
+
 **Add Android internal storage save support(with my RMMV plugin)**
 
 **Add custom save path setup**

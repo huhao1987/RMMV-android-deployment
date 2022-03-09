@@ -19,4 +19,8 @@ class rpgViewClient: WebViewClient() {
         super.onReceivedError(view, request, error)
         view?.setBackgroundColor(Color.WHITE)
     }
+
+    override fun onPageFinished(view: WebView?, url: String?) {
+        super.onPageFinished(view, url)
+    }
 }

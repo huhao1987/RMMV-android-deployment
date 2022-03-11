@@ -18,6 +18,11 @@ enum class encrypt{
         Base64
 }
 
+enum class Accelerate{
+    Hardware,
+    Software,
+    None
+}
 class JSInterface(private var mContext: Context, var custompath:String?=null,var encryptmethod:encrypt=encrypt.None, var middlepath:String?=null) : Any() {
     private val TAG = "RPGsavestatus::"
     private val path =

@@ -39,6 +39,7 @@ class rpgPlayerView   : WebView {
     private var gamename:String?=null
     private var custompath:String?=null
     private var savetype:encrypt=encrypt.Base64
+    private var accelerate:Accelerate=Accelerate.Software
     fun setevaluateJavascript(value:String):rpgPlayerView{
         this.rendervalue=value
         return this
@@ -54,6 +55,11 @@ class rpgPlayerView   : WebView {
     }
     fun setSaveType(asavetype:encrypt):rpgPlayerView{
         savetype=asavetype
+        return this
+    }
+
+    fun setAccelerate(accelerate: Accelerate):rpgPlayerView{
+        this.accelerate=accelerate
         return this
     }
     fun build():rpgPlayerView{
@@ -91,6 +97,7 @@ class rpgPlayerView   : WebView {
 
         if(fullscreen)
             UiUtils.setFullScreen(context)
+        this.setLayerType(if(accelerate==Accelerate.Hardware)View.LAYER_TYPE_HARDWARE else if(accelerate==Accelerate.Software) View.LAYER_TYPE_SOFTWARE else View.LAYER_TYPE_NONE,null)
     }
 
     fun setupcustompath(custompath:String){
